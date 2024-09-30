@@ -1,0 +1,10 @@
+<div class="article">
+    <header id="article-title">
+        <h1>{{ .Title }}</h1>
+        created: {{ .Date.Format "2006-01-02" }}
+    </header>
+
+    <main id="article-content">
+        {{ .Content }}
+    </main>
+</div>

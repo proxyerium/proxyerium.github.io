@@ -1,0 +1,10 @@
+{{ define "title" }}
+    {{ .Page.Title }}
+{{ end }}
+
+{{ define "main" }}
+    <div class="single-back" style="margin-left: 2vw">
+        <a href="..">~{{ .RelPermalink }}</a>
+    </div>
+    {{  partial "article" . }}
+{{ end }}

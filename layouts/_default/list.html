@@ -1,0 +1,21 @@
+{{ define "main" }}
+    <div id="list-navbar">
+        <a href=".."><- back</a>
+        <h3>posts</h3>
+    </div>
+    <ul id="list-articles">
+        {{ range .Pages.ByDate.Reverse }}
+            <li>
+                <a href="{{ .RelPermalink }}">
+                    {{ .Title }}
+                    <br>
+                    {{ .Date.Format "2006-01-02" }}
+                </a>
+            </li>
+        {{ end }}
+    </ul>
+{{ end }}
+
+{{ define "footer" }}
+    {{ partial "footer" . }}
+{{ end }}

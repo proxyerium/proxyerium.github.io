@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'go fonts';
+    src:
+        url('../font/Go-Regular.ttf') format('truetyle'),
+        url('../font/Go-Bold.ttf') format('ttf'),
+        url('../font/Go-Italic.ttf') format('truetyle'),
+        url('../font/Go-Mono.ttf') format('truetyle');
+}
+
+:root {
+    --font-base: 'consolas';
+
+    --txt-majorcolor-dark: oklch(90% 0.01 157.38);
+    --txt-minorcolor-dark: oklch(70% 0.1 157.38);
+    --txt-bonuscolor-dark: oklch(70% 0.14 260.66);
+    --bg-color: #232323;
+}

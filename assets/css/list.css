@@ -1,0 +1,15 @@
+#list-navbar {
+    margin: 1rem auto;
+    min-height: fit-content;
+}
+
+#list-articles {
+    padding: 2rem;
+    overflow: auto;
+    scrollbar-width: none;
+
+    > * {
+        font-size: 22px;
+        margin: 1rem 0;
+    }
+}
