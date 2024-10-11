@@ -5,8 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    {{ partial "head" . }}
+    {{/*  {{ block "title" . }}  */}}
     <title>proxyerium's website</title>
+
+    {{ $styles := resources.Match "/css/*.css"}}
+    {{ $bundle := $styles | resources.Concat "css/bundle.css" | minify }}
+    <link rel="stylesheet" href="{{ $bundle.RelPermalink }}" />
+
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 
@@ -15,8 +20,8 @@
             {{ block "main" . }}
             {{ end }}
 
-            {{ block "footer" . }}
-            {{ end }}
+            {{/*  {{ block "footer" . }}
+            {{ end }}  */}}
     </div>
 </body>
 

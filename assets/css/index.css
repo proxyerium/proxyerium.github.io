@@ -1,0 +1,35 @@
+#home-bio {
+    div {
+        background-color: #111111;
+        margin: 1rem 0;
+        padding: 1rem 1rem;
+    }
+    h1 {
+        border-left: .3rem solid #eee;
+        padding: .5rem 1rem;
+
+        font-size: 2.4rem;
+        &::first-letter {
+            color: magenta;
+        }
+        &::after{
+            content: "_";
+            animation: .5s blinking alternate infinite;
+        }
+    }
+
+    text-align: center;
+    a {
+        word-wrap: break-word;
+        font-size: 1.2rem;
+        text-decoration: underline var(--txt-minorcolor-dark);
+    }
+}
+
+#home-navbar {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    font-size: 1.2rem;
+}
