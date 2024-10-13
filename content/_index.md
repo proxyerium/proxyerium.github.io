@@ -1,6 +1,9 @@
 ---
 links:
-    github: 'https://github.com/proxyerium'
-    steam: 'https://steamcommunity.com/id/proxyerium'
-    bilibili: 'https://space.bilibili.com/24548578'
+    - name: 'github'
+      url: 'https://github.com/proxyerium'
+    - name: 'bilibili'
+      url: 'https://space.bilibili.com/24548578'
+    - name: 'steam'
+      url: 'https://steamcommunity.com/id/proxyerium'
 ---
