@@ -3,123 +3,150 @@ title: "Made in goHugo | 使用hugo框架搭建个人博客"
 date: 2023-09-17T15:36:21+08:00
 slug: use-hugo
 tags: [web]
-links: 
-    - title: hugo官方文档
-      website: https://gohugo.io/documentation
-      image: https://gohugo.io/favicon.ico
+# ## these would be better by using shortcode
+# links:
+#     - title: hugo官方文档
+#       website: https://gohugo.io/documentation
+#       image: https://gohugo.io/favicon.ico
 ---
 
-hugo是一个基于golang的静态网页框架。
-之前打算用python为主的web框架，但我的知识储量……完全不够！而hugo的本体仅仅一个`exe`，怎么想都更简单更方便吧🤩。
+[Hugo](https://gohugo.io/)是一个优秀的静态网页生成框架，适合博客或小型文档之类的没有动态数据交互的网页应用。
+一直打算翻新博客，尝试了纯粹三大件、也试过一些其他框架，但因为水平太次最终还是回来投奔Hugo。
 
-本篇记录我在探索Hugo的基本的搭建流程以及遇到的各种问题。
+## 安装Hugo
 
-## 安装hugo
+所需内容：
+- [Git](https://git-scm.com)
+- [Go](https://go.dev)
+- [Hugo](https://https://github.com/gohugoio/hugo/releases/latest)
 
-hugo有两个版本，*standard*和*extended*。*extended*自带scss转译器，hugo的主題多是用scss的，所以最好直接用*extended*，不然主题都用不得。
+Hugo分为standard和extended两个版本。区别是extended版本会把图片处理成WebP格式的，还有自带的sass处理器。两者的占用相差也不大，一般情况都选择extended即可。
 
-hugo提供很多安装方式，我还没有用包管理器的习惯，所以直接到[releases](https://github.com/gohugoio/hugo/releases)下载。
+## 框架结构
 
-## 主题
+完成上一步安装後，选择合适的位置，输入:
 
-hugo的社区挺活跃的，[官方主题列表](https://themes.gohugo.io/)收录了上百个主题。
+```shell
+hugo new site my-site
+cd my-site/
+git init
+```
 
-### 挑个主题
+这样就创建了一个名为`my-site`的新项目，\
+目录结构如图所示：
 
-这里用的是@CaiJimmy大佬的[hugo-theme-stack](https://github.com/CaiJimmy/hugo-theme-stack)主题，简洁大方：
-![Light mode](screenshot.webp)
+```txt
+my-site/
+├── archetypes/         <-- 文章模板，统一文章格式
+├── assets/             <-- 全局资源，图片、样式、脚本之类
+├── content/            <-- 网站内容，组织网站主要内容
+├── data/               <-- 通用数据，存放来自站内站外的资源
+├── i18n/               <-- 国际化，多语言适配
+├── layouts/            <-- 布局模板，不同页面呈现不同样式
+├── static/             <-- 静态资源
+├── themes/             <-- 主题
+└── hugo.toml           <-- 配置文件，网站的全局配置
+```
 
-> stack提供了一个[快速模板](https://github.com/CaiJimmy/hugo-theme-stack-starter)，同[标准仓库](https://github.com/CaiJimmy/hugo-theme-stack)一样的使用方法，里面有最基本的内容管理结构，有助于快速理解hugo的[内容管理](#📄内容管理)之类的核心概念，而且我使用这个仓库遇到的莫名其妙的问题更少。
+现在可以启动hugo自带的网页服务器，访问默认地址`127.0.0.1:1313`观察网页效果：
 
-主题是我搞得**最久**的部分**之一**。stack有[文档](https://stack.jimmycai.com/guide/)，不过感觉不算通俗易懂，不适合刚接触hugo的我😢，我看着这些模模糊糊的描述，又对着hugo的文档横竖看了好几天才大概理解那些个参数。
+```shell
+hugo serve
+```
 
-### 安装主题
+## 安装主题
 
-hugo主题有*git submodule*和*hugo module*两种安装方法。
-前者需要把仓库克隆到 `themes` 文件夹里；
-後者只需要在配置文件里多加一两行即可，首次运行 `hugo serve` 命令会自动下载并应用主题。
+不出意外的话，访问hugo服务首先映入眼帘的，只有page not found一行。
+新建项目没有任何的预设布局，网站的DOM结构基本是空的，无法正常呈现内容。
 
-~~还有一个手动下载仓库放到themes里的方法，但是何必呢~~
+这就轮到theme出马，使用主题避免自己写样式的劳苦，
+[Hugo官方的主题仓库](https://themes.gohugo.io/)有许多不同类型不同风格的主题可供挑选。\
+我之前使用[stack](https://github.com/CaiJimmy/hugo-theme-stack)，很干净的主题，
+不过这一次我想自己做主题，试图锻炼我的审美。
 
-如果不对主题作修改，*hugo module*会省心一点。但是要改动的话，就要到项目仓库里复制要改的文件，然後以相同的目录结构，放在网站的 `layouts` 文件夹中。以及，stack如果有重大更新的话要手动在stack里改一下版本号。
+主题使用Git的子模块管理，把中意的主题作为子模块拉到`theme/<theme-name>`文件夹，再修改一行配置文件即可：
 
-*git submodule*把仓库都弄来了，所以既可以复制一份放到 `layouts` 去改，也可以直接改动主题的文件。
+```shell
+git submodule add https://github.com/CaiJimmy/hugo-theme-stack.git theme/stack
+echo "theme = 'stack'" >> hugo.toml
+```
 
-❗ 但是，直接往stack的源仓库提交更改是不行的，要把仓库fork过来自用，然後把submodule的url改成fork的地址才行。
+现在应该能正常呈现网站内容了。
 
 ## 内容管理
 
-内容管理是hugo的核心部分之一。这么短的篇幅介绍不完的（挖坑）。目前就只是能把网站跑起来的阶段，也就理解了皮毛，更深的我不会🤓。
+Hugo的所有内容都放在`content/`之中管理，根据内容的分层结构处理路由等事务。\
+先来介绍一个重要概念，**Page bundles**。page bundle分两种，其一是**leaf bundle**，另一是**branch bundle**。
 
-### page bundle
+### leaf bundle
 
-搞得**最久**的部分**之二**，难点主要是hugo的页面组织结构：***page bundle***，分为*leaf bundle*和*branch bundle*。
+把内容及其配套资源统放到一个文件夹里，其中内涵一个`index.md`，如此形成一个leaf bundle。譬如这里有一个about/文件夹，内涵一篇文章和一张图片：
 
-> page bundle用来更有序地组织有关联的内容，比如可以把一篇博客用到的图片或文档之类的资源，统放到一个文件夹内。
-> 或者直接把资源文件都往`static`或`assets`文件夹放，但是内容多起来就不易管理了。
-
-#### 还有一个 leaf bundle
-
-*leaf bundle*的主角是名为`single`的单页，只需要在一个文件夹里放一个`index.md`即可形成。
-这种结构没有子级，不管有多少个子级文件夹，所有资源都是同级的。
-以本篇的结构举例：
 ```txt
-post
-└── use-hugo
+content/
+└── leaf/
     ├── index.md
-    ├── cover.webp
-    └── screenshot.webp
+    └── cover.jpg
 
-# 文章主体写在index.md里，
-# 图片之类的附件可以用markdown来链接
 ```
 
-> 还有一个配合*leaf bundle*的*headless bundle*，我还不会用🤓。
+顾名思义，leaf喻为植物形态的末端，不再有后继，是内容管理的基本单元。
 
-#### **branch bundle**
+### branch bundle
 
-*branch bundle*是树状结构，能创建一个囊括许多单页的 `list` 。一个文件夹放一个且只能一个 `_index.md` 来形成这种结构，所有资源都在同一文件夹中。*leaf bundle*不可嵌套，而该结构可嵌套任意层。
+而branch bundle则更高一层，可容纳后继的文件夹，用作目录或其他功能页面：
 
-在stack主题中，可以在 `_index.md` 的frontmatter写一个分区的标签：
-
-```yaml
----
-title: "Gallery"
-description: "放点图片"
----
+```txt
+content/
+├── branch/
+│   ├── leaf-a/
+│   │   └── index.md
+│   ├── leaf-b/
+│   │   └── index.md
+│   └── _index.md
+└── _index.md
 ```
 
-对应分区的顶部就会展现出该标签：
-![section](lable.webp)
+branch/下的`_index.md`和所有内涵的文件夹是一个branch、content/同理，所以这里有两个branch bundles。
 
-> stack主题就是利用branch bundle和frontmatter来渲染侧边栏的分区，具体参阅[stack的文档](https://stack.jimmycai.com/config/menu)。\
-> 这种结构不用来写文章，更多是整理不同分区类型的，总之我不会用🤓。
+> ⚠️ content/作为顶层，自然永远都是brach bundle。
+
+page bundle组织彼此相关联的内容，避免什么资源文件都往`static/`或`assets/`放。
+
+## 配置文件
+
+Hugo之前默认生成一个全局配置文件`hugo.toml`：
+
+```toml
+# hugo.toml
+baseURL = 'https://example.org/'
+languageCode = 'en-us'
+title = 'My New Hugo Site'
+theme = 'stack'
+```
+
+`title`随意修改，这是浏览器标签页的标题；\
+`baseURL`是部署地址，我接下来使用Github Action部署网站，所以我改成"https://proxyerium.github.io"。
 
 ## 部署网站
 
-### Hugo Build
-
-在命令行直接输入 `hugo` ，hugo会将源码渲染成静态网页，输出到`public`文件夹。直接把该文件夹里的所有东西推送到远程仓库就得了。
+部署网站有[许多方法](https://gohugo.io/hosting-and-deployment/)，我还没尝试过Github Action以外的方法，暂且只写这一种 :P
 
 ### Github Actions
 
-> ❗ [快速模板](#安装主题)有自带的workflow，然而该模板其实是使用docker在`github codespace`里部署的，里面的workflow不适用于Github Actions，所以要自行弄一个workflow。
+1. 远程仓库，找到Settings -> Pages -> Source，改成"Github Actions"。
+2. 本地仓库，创建工作流脚本`.github/workflows/hugo.yaml`，用官方提供的[工作流模板](https://gohugo.io/hosting-and-deployment/hosting-on-github/#procedure)即可，唯独留心里面的`HUGO_VERSION`对应自己正在使用的版本，免得兼容问题。
+3. 整理好所有内容後推送到远程仓库。
+4. 找到远程仓库顶部Actions标签页，观赏工作流程，结束後便能访问已部署的网站，大功告成！
 
-其实就是把build工作交给Github Actions来做，根据[hugo文档](https://gohugo.io/hosting-and-deployment/hosting-on-github/)照着步骤做就行。
+## 挖坑
 
-或者也能到自己的远程仓库页面，在Actions面板点击`New workflow`，使用github提供的模板，修改分支名和版本号即可。保存至`/.github/workflows/`目录下，以後每次push到远程仓库，workflow都会开始工作，将源码渲染成静态网页，等待部署完成即可。
-
-> 以上两种方法不出意外的话效果都一样的，只不过前者是把静态页面的内容放在在仓库里，没有源码。
-
-暂时先这么多，还有很多核心功能我都还没摸过：`shortcodes`，`templates`，`i18n`，`archetypes`...
-
-等我再去看一段时间😭🌹。
-
-****
+暂时先这样，还有很多核心功能我都还没摸过：shortcodes、templates、i18n、archetypes……应该会填完的吧？
 
 ## changelog
 
 |||
 |:-:|:--|
-| 2023-02-20 | #2: 略微修改 |
-| 2023-09-27 | #1: 略微修改 |
+| 2024-10-13 | 重写 |
+| 2023-02-20 | 略微修改 |
+| 2023-09-27 | 略微修改 |
