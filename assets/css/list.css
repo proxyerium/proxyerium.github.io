@@ -2,7 +2,9 @@
     margin: 1rem auto;
     min-height: fit-content;
 }
-
+#list-title {
+    padding-left: 1rem;
+}
 #list-articles {
     padding: 2rem;
     overflow: auto;

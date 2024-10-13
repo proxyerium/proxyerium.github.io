@@ -1,20 +1,26 @@
 {{ define "main" }}
 <main id="app-main">
 
-    <div id="home-bio" class="home">
-        <h1> ~$ proxyerium</h1>
+    <div id="home-bio">
+        <div>
+            <h1>~$ proxyerium</h1>
+        </div>
+
+        <nav>
+            {{ range .Page.Params.links }}
+                <a href="{{ .url }}">{{ .name }}</a>
+            {{ end }}
+        </nav>
     </div>
 
-    <div id="home-linkbar" class="home">
-        {{ range $media,$link := .Page.Params.links }}
-            <a href="{{ $link }}">{{ $media }}</a>
+    <div id="home-navbar">
+        {{ range .Site.Sections.ByWeight }}
+            <a href="{{ .RelPermalink }}">::{{ .Title }} -></a>
         {{ end }}
     </div>
 
-    <div id="home-navbar" class="home">
-        {{ range .Site.Sections }}
-            <a href="{{ .RelPermalink }}">:: {{ .Title }} -></a>
-        {{ end }}
+    <div id="home-toolbar">
+        <input id="button-theme" type="button" value="theme">
     </div>
 </main>
 

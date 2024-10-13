@@ -24,19 +24,19 @@ a {
 #app-container {
     display: flex;
     flex-direction: column;
+
+    overflow: auto;
 }
 #app-main {
     display: grid;
-    justify-content: center;
-    &:has(.home) {
-        align-content: center;
-    }   align-content: start;
-    justify-items: center;
+    grid-template-columns: 30% 20%;
+
+    place-content: center;
+    place-items: center;
 }
 #app-footer {
     justify-self: end;
     background-color: rgba(30, 141, 210, 0.343);
-    width: 100vw;
 
     text-align: center;
     margin-top: auto;

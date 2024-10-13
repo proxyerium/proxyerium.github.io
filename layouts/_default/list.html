@@ -1,8 +1,8 @@
 {{ define "main" }}
     <div id="list-navbar">
         <a href=".."><- back</a>
-        <h3>posts</h3>
     </div>
+    <h2 id="list-title">{{ .Page.Title }}</h2>
     <ul id="list-articles">
         {{ range .Pages.ByDate.Reverse }}
             <li>
