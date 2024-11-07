@@ -1,14 +1,13 @@
-#home-bio {
-    div {
-        background-color: #111111;
-        margin: 1rem 0;
-        padding: 1rem 1rem;
-    }
-    h1 {
-        border-left: .3rem solid #eee;
-        padding: .5rem 1rem;
+.home.hero {
+    background-color: #000;
+    padding: 2rem 2rem 2rem 1rem;
 
-        font-size: 2.4rem;
+    > h1 {
+        padding-left: 1rem;
+        border-left: .3rem solid #fff;
+        &::before {
+            content: "~";
+        }
         &::first-letter {
             color: magenta;
         }
@@ -17,30 +16,21 @@
             animation: .5s blinking alternate infinite;
         }
     }
-
-    text-align: center;
-    a {
-        word-wrap: break-word;
-        font-size: 1.2rem;
-        text-decoration: underline var(--txt-minorcolor-dark);
-    }
 }
 
-#home-navbar {
+.home.navbar {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 
-    font-size: 1.2rem;
+    font-size: 18px;
 }
 
-#home-toolbar {
-    margin: 4rem 1rem;
+.home.list {
+    font-size: 22px;
+    margin-top: 4rem;
 
-    grid-column: 1 / span 2;
-    justify-self: center;
-
-    input[type="button"] {
-        background-color: #111111;
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }

@@ -1,31 +1,21 @@
 {{ define "main" }}
-<main id="app-main">
 
-    <div id="home-bio">
-        <div>
-            <h1>~$ proxyerium</h1>
-        </div>
+<div class="home hero">
+    <h1>$ proxyerium</h1>
+</div>
 
-        <nav>
-            {{ range .Page.Params.links }}
-                <a href="{{ .url }}">{{ .name }}</a>
-            {{ end }}
-        </nav>
-    </div>
-
-    <div id="home-navbar">
-        {{ range .Site.Sections.ByWeight }}
-            <a href="{{ .RelPermalink }}">::{{ .Title }} -></a>
+<div class="home navbar">
+    <nav>
+        {{ range .Page.Params.links }}
+            <a href="{{ .url }}">{{ .name }}</a>
         {{ end }}
-    </div>
+    </nav>
+</div>
 
-    <div id="home-toolbar">
-        <input id="button-theme" type="button" value="theme">
-    </div>
-</main>
+<div class="home list">
+    {{ range .Site.Sections.ByWeight }}
+        <a href="{{ .RelPermalink }}">::{{ .Title }} -></a>
+    {{ end }}
+</div>
 
-{{ end }}
-
-{{ define "footer" }}
-    {{ partial "footer" . }}
 {{ end }}
