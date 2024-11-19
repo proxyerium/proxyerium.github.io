@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.Language }}">
 
-<head> {{ block "head" . }} {{ end }} </head>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {{/*  {{ block "title" . }}  */}}
+    <title>proxyerium's website</title>
+
+    {{ $styles := resources.Match "/css/**.css"}}
+    {{ $bundle := $styles | resources.Concat "css/bundle.css" | minify }}
+    <link rel="stylesheet" href="{{ $bundle.RelPermalink }}" />
+</head>
 
 <body>
-
-    <main>
-        {{ block "main" . }}
-        {{ end }}
-    </main>
-
-    <aside>
-        {{ block "aside" . }}
-        {{ end }}
-    </aside>
-
-
+    {{ block "main" . }} {{ end }}
 </body>
 
 </html>

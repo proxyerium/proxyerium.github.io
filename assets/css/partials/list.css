@@ -1,0 +1,12 @@
+.list.navbar {
+    margin: 1rem auto;
+}
+
+.list.articles {
+    overflow: auto;
+    margin: 1rem auto;
+    > li {
+        list-style-type: none;
+        margin: 1rem;
+    }
+}

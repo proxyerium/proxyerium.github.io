@@ -1,0 +1,15 @@
+.single {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+}
+
+.single.nav {
+    background-color: aquamarine;
+    margin: 1rem;
+}
+
+.single.article {
+    margin: 0 12rem;
+}

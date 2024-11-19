@@ -1,12 +1,3 @@
-/* @font-face {
-    font-family: 'go fonts';
-    src:
-        url('../font/Go-Regular.ttf') format('truetyle'),
-        url('../font/Go-Bold.ttf') format('ttf'),
-        url('../font/Go-Italic.ttf') format('truetyle'),
-        url('../font/Go-Mono.ttf') format('truetyle');
-} */
-
 :root {
     --font-base: 'consolas';
 

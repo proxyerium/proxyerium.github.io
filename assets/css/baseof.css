@@ -15,6 +15,11 @@ main {
     background-color: var(--bg-color);
 }
 
+main {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
 a {
     color: var(--txt-minorcolor-dark);
     text-decoration: none;
@@ -25,9 +30,6 @@ a {
     }
 }
 
-main {
-    display: grid;
-    place-content: center;
-    place-items: center;
-    row-gap: 1rem;
+img {
+    max-width: 100%;
 }

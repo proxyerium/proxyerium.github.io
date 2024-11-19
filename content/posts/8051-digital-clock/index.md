@@ -3,7 +3,7 @@ title: "8051MCU | 电子时钟"
 date: 2023-12-13T08:33:24+08:00
 slug: stc51-clock
 tags: [embedded]
-links: 
+links:
     - title: 项目源码
       description: 下次不写那么多注释了😌
       website: https://github.com/Proxyerium/8051-digital-clock

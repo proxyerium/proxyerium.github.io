@@ -1,10 +1,11 @@
-{{ define "title" }}
-    {{ .Page.Title }}
-{{ end }}
-
 {{ define "main" }}
-    <div class="single-back" style="margin-left: 2vw">
+<main class="single">
+    <nav class="single nav">
+        {{/*  {{ particle "back" .}}  */}}
         <a href="..">~{{ .RelPermalink }}</a>
-    </div>
-    {{  partial "article" . }}
+    </nav>
+    <article class="single article">
+        {{ partial "article" . }}
+    </article>
+</main>
 {{ end }}

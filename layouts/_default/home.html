@@ -1,0 +1,24 @@
+{{ define "main" }}
+
+<main class="home">
+    <div class="home hero">
+        <h1>$ proxyerium</h1>
+    </div>
+
+    <div class="home navbar">
+        <nav>
+            {{ range .Page.Params.links }}
+                <a href="{{ .url }}">{{ .name }}</a>
+            {{ end }}
+        </nav>
+    </div>
+
+    <div class="home category">
+        {{ range .Site.Sections.ByWeight }}
+            <a href="{{ .RelPermalink }}">::{{ .Title }} -></a>
+        {{ end }}
+    </div>
+</main>
+
+
+{{ end }}
