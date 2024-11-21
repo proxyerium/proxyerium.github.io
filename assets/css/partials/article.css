@@ -1,11 +1,12 @@
 .article {
+    margin: 0 2rem;
+
     display: flex;
     flex-direction: column;
 
 }
 
 .article.header {
-    margin: 1rem 0;
     height: fit-content;
     > h1 {
         text-align: center;
@@ -13,11 +14,63 @@
     }
     > small {
         display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
 
         > li {
-            list-style-type: '- ';
-            margin: 0 2rem;
+            list-style-type: none;
+            margin: 1rem;
             font-size: 1rem;
         }
+    }
+}
+
+.article.content {
+    > * {
+        margin: 1rem 0 1rem 1rem;
+    }
+
+    span {
+        white-space: pre-wrap;
+    }
+
+    h2, h3, h4, h5, h6 {
+        color: light-dark(var(--light-minor), var(--dark-minor));
+        margin: 1rem 0 0 0;
+        width: fit-content;
+
+        &::after {
+            margin-top: .4rem;
+            content: '';
+            display: block;
+            width: 120%;
+            height: .1rem;
+            background-color: light-dark(var(--light-minor), var(--dark-minor) 0%);
+        }
+    }
+
+    hr {
+        margin: 2rem 8rem;
+    }
+
+    blockquote {
+        margin: 1rem 0 1rem 1rem;
+        background: linear-gradient(to right, var(--dark-minor), var(--dark-bg) 60%);
+    }
+
+    code{
+        background-color: rgb(35, 102, 102);
+    }
+
+    /* override the default pre styles that generated probably by markup engine */
+    pre {
+        background-color: rgb(51, 60, 60) !important;
+        * {
+            font-family: var(--font-mono);
+        }
+    }
+
+    img {
+        width: 60%;
     }
 }

@@ -1,35 +1,24 @@
-* {
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 
-    color: var(--txt-majorcolor-dark);
     font-family: var(--font-base);
 }
 
 html,
 body,
 main {
-    height: 100%;
-    width: 100%;
-    background-color: var(--bg-color);
-}
-
-main {
-    overflow-x: hidden;
-    overflow-y: auto;
+    width: clamp(320px, 100vw, 100vw);
+    height: 100dvh;
 }
 
 a {
-    color: var(--txt-minorcolor-dark);
     text-decoration: none;
 
     &:hover {
-        font-weight: bolder;
         text-decoration: underline;
     }
-}
-
-img {
-    max-width: 100%;
 }
