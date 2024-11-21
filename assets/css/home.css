@@ -1,8 +1,9 @@
 .home.hero {
-    background-color: #000;
+    background-color: #111111;
     padding: 2rem 2rem 2rem 1rem;
 
     > h1 {
+        font-family: var(--font-mono);
         padding-left: 1rem;
         border-left: .3rem solid #fff;
         &::before {

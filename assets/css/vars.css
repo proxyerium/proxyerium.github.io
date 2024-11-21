@@ -1,9 +1,26 @@
 :root {
-    --font-base: 'consolas';
+    --font-base: gofonts, system-ui;
+    --font-mono: 'gofonts mono', monospace;
 
+    color-scheme: light dark;
     /* === text colors === */
-    --txt-majorcolor-dark: oklch(90% 0.01 157.38);
-    --txt-minorcolor-dark: oklch(70% 0.1 157.38);
-    --txt-bonuscolor-dark: oklch(70% 0.14 260.66);
-    --bg-color: #232323;
+    --dark-txt-major: oklch(90% 0.01 157.38);
+    --dark-txt-minor: oklch(70% 0.1 157.38);
+    --dark-txt-bonus: oklch(70% 0.14 260.66);
+    --light-txt-major: oklch(10% 0.01 157.38);
+    --light-txt-minor: oklch(70% 0.1591 6.22);
+    --light-txt-bonus: oklch(70% 0.1 56.68);
+
+    --light-bg: oklch(90% 0 0);
+    --dark-bg: oklch(25% 0 0);
+}
+
+html,
+body,
+main {
+    background-color: light-dark(var(--light-bg), var(--dark-bg));
+}
+
+a {
+    color: light-dark(var(--light-txt-minor), var(--dark-txt-minor));
 }

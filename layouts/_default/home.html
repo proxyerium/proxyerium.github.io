@@ -15,7 +15,7 @@
 
     <div class="home category">
         {{ range .Site.Sections.ByWeight }}
-            <a href="{{ .RelPermalink }}">::{{ .Title }} -></a>
+            <a href="{{ .RelPermalink }}">::{{ .Section }} -></a>
         {{ end }}
     </div>
 </main>
