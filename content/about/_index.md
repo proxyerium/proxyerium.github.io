@@ -1,9 +1,10 @@
 ---
-title: 'about'
 layout: single
 weight: 1
 ---
 
-thanks for your visiting\
-i am tring to write styles on my own,
-please forgive the shabby pages here :3
+thanks for visiting,
+
+i am still working on the styles on my own,
+
+please forgive me these poor pages here :3
