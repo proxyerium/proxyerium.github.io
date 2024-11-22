@@ -1,5 +1,5 @@
 ---
-title: "Made in goHugo | 使用hugo框架搭建个人博客"
+title: "goHugo | 使用hugo框架搭建个人博客"
 date: 2023-09-17T15:36:21+08:00
 slug: use-hugo
 tags: [web]
@@ -11,7 +11,7 @@ tags: [web]
 ---
 
 [Hugo](https://gohugo.io/)是一个优秀的静态网页生成框架，适合博客或小型文档之类的没有动态数据交互的网页应用。
-一直打算翻新博客，尝试了纯粹三大件、也试过一些其他框架，但因为水平太次最终还是回来投奔Hugo。
+一直打算翻新博客，尝试过朴素三大件、也试过一些其他框架，但因为水平太次最终还是回来投奔Hugo。本篇介绍hugo的基本结构及用法。
 
 ## 安装Hugo
 
@@ -22,9 +22,9 @@ tags: [web]
 
 Hugo分为standard和extended两个版本。区别是extended版本会把图片处理成WebP格式的，还有自带的sass处理器。两者的占用相差也不大，一般情况都选择extended即可。
 
-## 框架结构
+## 目录结构
 
-完成上一步安装後，选择合适的位置，输入:
+完成安装後，选择合适的路径，输入:
 
 ```shell
 hugo new site my-site
@@ -48,7 +48,7 @@ my-site/
 └── hugo.toml           <-- 配置文件，网站的全局配置
 ```
 
-现在可以启动hugo自带的网页服务器，访问默认地址`127.0.0.1:1313`观察网页效果：
+现在可以启动hugo自带的网页服务器，方便在本地调试网站。访问默认地址`127.0.0.1:1313`观察网页效果：
 
 ```shell
 hugo serve
@@ -75,12 +75,13 @@ echo "theme = 'stack'" >> hugo.toml
 
 ## 内容管理
 
-Hugo的所有内容都放在`content/`之中管理，根据内容的分层结构处理路由等事务。\
-先来介绍一个重要概念，**Page bundles**。page bundle分两种，其一是**leaf bundle**，另一是**branch bundle**。
+Hugo的所有内容都放在`content/`之中管理，根据内容的分层结构处理路由等事务。
+先来介绍一个重要概念，**Page bundles**。
+分两种，**leaf bundle** 和 **branch bundle**。
 
 ### leaf bundle
 
-把内容及其配套资源统放到一个文件夹里，其中内涵一个`index.md`，如此形成一个leaf bundle。譬如这里有一个about/文件夹，内涵一篇文章和一张图片：
+把内容及其所需的资源统放到一个文件夹里，其中包含一个`index.md`，形成一个leaf bundle。譬如一个about/文件夹，其中有一篇文章和一张图片。
 
 ```txt
 content/
@@ -90,11 +91,11 @@ content/
 
 ```
 
-顾名思义，leaf喻为植物形态的末端，不再有后继，是内容管理的基本单元。
+leaf喻为植物形态的末端，不再有后继，是内容管理的基本单元。
 
 ### branch bundle
 
-而branch bundle则更高一层，可容纳后继的文件夹，用作目录或其他功能页面：
+而branch bundle则更高一层，可用作目录，包含任意数量的子文件夹，其中包含一个`_index.md`。
 
 ```txt
 content/
@@ -107,15 +108,14 @@ content/
 └── _index.md
 ```
 
-branch/下的`_index.md`和所有内涵的文件夹是一个branch、content/同理，所以这里有两个branch bundles。
+这里面有几个branch bundle？\
+content/作为顶层文件夹，肯定是一个brach bundle，其中的branch/有_index.md，所以答案是两个。
 
-> ⚠️ content/作为顶层，自然永远都是brach bundle。
-
-page bundle组织彼此相关联的内容，避免什么资源文件都往`static/`或`assets/`放。
+page bundle组织彼此相关联的内容，避免什么东西都往`static/`或`assets/`这两个公共资源文件夹里放。
 
 ## 配置文件
 
-Hugo之前默认生成一个全局配置文件`hugo.toml`：
+Hugo默认在新的项目生成一个全局配置文件`hugo.toml`：
 
 ```toml
 # hugo.toml
@@ -125,19 +125,20 @@ title = 'My New Hugo Site'
 theme = 'stack'
 ```
 
-`title`随意修改，这是浏览器标签页的标题；\
-`baseURL`是部署地址，我接下来使用Github Action部署网站，所以我改成"https://proxyerium.github.io"。
+`title`是浏览器标签页的标题，随意修改；\
+`baseURL`定义网站的基本url，作为所有相对链接的绝对参照点，乱填可能会导致资源无法正确定位。
+我使用Github Action部署网站，所以写"https://proxyerium.github.io/"，**注意尾部一定要有斜杠**。
 
 ## 部署网站
 
-部署网站有[许多方法](https://gohugo.io/hosting-and-deployment/)，我还没尝试过Github Action以外的方法，暂且只写这一种 :P
+部署网站有许多方法，参考[官方文档](https://gohugo.io/hosting-and-deployment/)。我还没尝试过Github Action以外的方法，暂且只写这一种 :P
 
 ### Github Actions
 
 1. 远程仓库，找到Settings -> Pages -> Source，改成"Github Actions"。
 2. 本地仓库，创建工作流脚本`.github/workflows/hugo.yaml`，用官方提供的[工作流模板](https://gohugo.io/hosting-and-deployment/hosting-on-github/#procedure)即可，唯独留心里面的`HUGO_VERSION`对应自己正在使用的版本，免得兼容问题。
 3. 整理好所有内容後推送到远程仓库。
-4. 找到远程仓库顶部Actions标签页，观赏工作流程，结束後便能访问已部署的网站，大功告成！
+4. 找到远程仓库顶部Actions标签页，观赏action流程，完成後便能访问部署好的网站，大功告成！
 
 ## 挖坑
 
@@ -147,6 +148,7 @@ theme = 'stack'
 
 |||
 |:-:|:--|
+| 2024-11-22 | 略微修改，修正含糊有误的文段 |
 | 2024-10-13 | 重写 |
 | 2023-02-20 | 略微修改 |
 | 2023-09-27 | 略微修改 |
