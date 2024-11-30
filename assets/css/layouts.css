@@ -1,4 +1,4 @@
-main.home {
+.home {
     display: grid;
     justify-content: center;
     justify-items: center;
@@ -8,13 +8,56 @@ main.home {
         align-self: center;
     }
 }
+.home.hero {
+    background-color: #111111;
+    padding: 2rem 2rem 2rem 1rem;
 
-main.section {
+    > h1 {
+        padding-left: 1rem;
+        border-left: .3rem solid #fff;
+        color: #fff;
+        font-family: var(--font-mono);
+        &::first-letter {
+            color: magenta;
+        }
+        &::after{
+            content: "_";
+            animation: .5s blinking alternate infinite;
+        }
+    }
+}
+.home.links {
     display: flex;
     flex-direction: column;
+    gap: 1rem;
+
+    font-size: 18px;
+}
+.home.category {
+    font-size: 22px;
+    margin-top: 4rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+
+.section {
+    grid-template-rows: auto auto 1fr auto;
+    align-content: start;
+    justify-items: center;
 
     > h2 {
-        margin: 2rem auto;
-        align-self: center;
+        margin: 4rem;
     }
+}
+
+
+.single {
+    grid-template-rows: min-content auto;
+}
+.single.breadcrumb {
+    place-self: center;
+    margin: 1rem 0;
 }

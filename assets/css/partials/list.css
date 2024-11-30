@@ -2,8 +2,9 @@
     margin: 1rem auto;
 }
 
-.list.articles {
+.list.items {
     overflow: auto;
+    font-size: 20px;
     margin: 1rem auto;
     > li {
         list-style-type: none;

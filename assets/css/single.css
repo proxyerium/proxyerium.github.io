@@ -1,9 +1,0 @@
-.single {
-    display: flex;
-    flex-direction: column;
-    justify-items: center;
-}
-
-.single.nav {
-    margin: 1rem;
-}
