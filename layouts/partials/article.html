@@ -1,4 +1,4 @@
-<article class="article">
+<section class="article">
     <header class="article header">
         <h1>{{ .Title }}</h1>
         {{ if eq .Kind "page" }}
@@ -8,7 +8,7 @@
         {{ end }}
     </header>
 
-    <section class="article content">
+    <article class="article content">
         {{ .Content }}
-    </section>
-</article>
+    </article>
+</section>
