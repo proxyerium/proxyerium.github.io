@@ -1,9 +1,6 @@
 {{ define "main" }}
 <main class="single">
-    <nav class="single breadcrumb">
-        {{/*  {{ particle "back" .}}  */}}
-        <a href="..">~{{ .RelPermalink }}</a>
-    </nav>
+    {{ partial "signage" . }}
 
     {{ partial "article" . }}
 </main>

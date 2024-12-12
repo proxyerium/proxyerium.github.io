@@ -1,3 +1,36 @@
+.signage {
+    display: flex;
+    flex-direction: row;
+
+    background-color: #111111;
+    padding: 2rem 2rem 2rem 1rem;
+
+
+    * {
+        font-family: var(--font-mono);
+        font-size: 32px;
+    }
+
+    nav {
+        &::before{
+            content: "";
+            border-left: #fff solid .4rem;
+            padding: .5rem;
+        }
+    }
+    a {
+        text-decoration-line: none;
+        color: magenta;
+    }
+    h1 {
+        color: #fff;
+        &::after{
+            content: "_";
+            animation: .5s blinking alternate infinite;
+        }
+    }
+
+}
 .home {
     display: grid;
     justify-content: center;
@@ -6,24 +39,6 @@
 
     > h2 {
         align-self: center;
-    }
-}
-.signage {
-    background-color: #111111;
-    padding: 2rem 2rem 2rem 1rem;
-
-    > h1 {
-        padding-left: 1rem;
-        border-left: .3rem solid #fff;
-        color: #fff;
-        font-family: var(--font-mono);
-        &::first-letter {
-            color: magenta;
-        }
-        &::after{
-            content: "_";
-            animation: .5s blinking alternate infinite;
-        }
     }
 }
 .home.links {
