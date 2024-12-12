@@ -1,9 +1,7 @@
 {{ define "main" }}
+{{ partial "signage" . }}
 <main class="section">
     <h2>{{ .Page.Title }}</h2>
-    <nav class="list navbar">
-        <a href=".."><- back</a>
-    </nav>
     {{ .Content }}
     {{ partial "list" . }}
 </main>
