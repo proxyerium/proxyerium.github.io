@@ -1,3 +1,18 @@
+:root {
+    --font-base: go, system-ui;
+    --font-mono: go-mono, monospace;
+
+    color-scheme: light dark;
+    /* === main colors === */
+    --dark-major: oklch(90% 0.01 157.38);
+    --dark-minor: oklch(80% 0.1 157.38);
+    --light-major: oklch(10% 0.01 157.38);
+    --light-minor: oklch(70% 0.1591 6.22);
+
+    --light-bg: oklch(85% 0 0);
+    --dark-bg: oklch(25% 0 0);
+}
+
 *,
 *::before,
 *::after {
@@ -11,6 +26,7 @@
 html,
 body {
     height: 100dvh;
+    background-color: light-dark(var(--light-bg), var(--dark-bg));
 }
 
 main {
@@ -20,6 +36,7 @@ main {
 
 a {
     text-decoration: none;
+    color: light-dark(var(--light-minor), var(--dark-minor));
 
     &:hover {
         text-decoration: underline;

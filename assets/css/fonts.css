@@ -1,20 +1,20 @@
 @font-face {
-    font-family: 'gofonts';
+    font-family: 'go';
     src: url('/fonts/Go-Regular.woff2') format('woff2');
 }
 @font-face {
-    font-family: 'gofonts';
+    font-family: 'go';
     src: url('/fonts/Go-Bold.woff2') format('woff2');
     font-weight: bold;
 }
 @font-face {
-    font-family: 'gofonts';
+    font-family: 'go';
     src: url('/fonts/Go-Italic.woff2') format('woff2');
     font-style: italic;
 }
 
 
 @font-face {
-    font-family: 'gofonts mono';
+    font-family: 'go-mono';
     src: url('/fonts/Go-Mono.woff2') format('woff2');
 }
