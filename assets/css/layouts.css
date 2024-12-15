@@ -1,9 +1,10 @@
 .signage {
     display: flex;
     flex-direction: row;
+    white-space: nowrap;
 
     background-color: #111111;
-    padding: 2rem 2rem 2rem 1rem;
+    padding: 1rem 2rem 1rem 1rem;
 
 
     * {
@@ -11,17 +12,29 @@
         font-size: 32px;
     }
 
-    nav {
+    .breadcrump {
+        display: inline-flex;
+        font-weight: bold;
+
         &::before{
             content: "";
             border-left: #fff solid .4rem;
             padding: .5rem;
         }
+        & :first-child::before{
+            content: "~";
+        }
+        & :not(:last-child):after{
+            content: "/";
+        }
+
+        a {
+            text-decoration-line: none;
+            color: magenta;
+        }
     }
-    a {
-        text-decoration-line: none;
-        color: magenta;
-    }
+
+
     h1 {
         color: #fff;
         &::after{
@@ -31,6 +44,8 @@
     }
 
 }
+
+
 .home {
     display: grid;
     justify-content: center;
@@ -71,8 +86,9 @@
 
 .single {
     grid-template-rows: min-content auto;
-}
-.single.breadcrumb {
-    place-self: center;
-    margin: 1rem 0;
+
+    .breadcrumb {
+        place-self: center;
+        margin: 1rem 0;
+    }
 }
