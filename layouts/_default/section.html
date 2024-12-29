@@ -1,7 +1,6 @@
 {{ define "main" }}
-{{ partial "signage" . }}
 <main class="section">
-    <h2>{{ .Page.Title }}</h2>
+    {{ partial "breadcrump" . }}
     {{ .Content }}
     {{ partial "list" . }}
 </main>

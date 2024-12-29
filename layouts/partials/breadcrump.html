@@ -1,5 +1,5 @@
-<nav class="signage">
-    <nav class="breadcrump">
+<div class="breadcrump">
+    <nav class="location">
         <!-- Ancestors -->
         {{ range after 0 .Ancestors.Reverse }}
             <a href="{{ .RelPermalink }}">{{ .File.ContentBaseName }}</a>
@@ -8,5 +8,5 @@
         <a href="{{ .RelPermalink }}">{{.File.ContentBaseName }}</a>
     </nav>
 
-    <h1>$&nbsp;proxyerium</h1>
-</nav>
+    <h1 class="signage">$&nbsp;proxyerium</h1>
+</div>

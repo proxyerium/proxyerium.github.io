@@ -26,6 +26,7 @@ section.article {
 .article.content {
     margin-top: 1rem;
     flex-wrap: wrap;
+    font-size: 1.4rem;
 
     span {
         white-space: pre-wrap;
