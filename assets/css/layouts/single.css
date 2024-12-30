@@ -1,8 +1,0 @@
-.single {
-    grid-template-rows: min-content auto;
-
-    .breadcrumb {
-        place-self: center;
-        margin: 1rem 0;
-    }
-}

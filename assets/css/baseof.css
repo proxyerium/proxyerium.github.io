@@ -1,5 +1,6 @@
 :root {
-    --font-base: go, system-ui;
+    /* === fonts === */
+    --font-regular: go, system-ui;
     --font-mono: go-mono, monospace;
 
     color-scheme: light dark;
@@ -17,7 +18,7 @@
     padding: 0;
     box-sizing: border-box;
 
-    font-family: var(--font-base);
+    font-family: var(--font-regular);
 }
 
 html,
