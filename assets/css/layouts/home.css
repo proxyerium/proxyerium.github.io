@@ -33,9 +33,9 @@
 
         &:hover {
             text-decoration: none;
-            color: light-dark(var(--light-major), var(--dark-major));
-            background-color: light-dark(var(--light-minor), var(--dark-minor));
-            border: 3px solid light-dark(var(--light-major), var(--dark-major));
+            color: var(--color-major);
+            background-color: var(--color-minor);
+            border-color: var(--color-major);
         }
     }
 }

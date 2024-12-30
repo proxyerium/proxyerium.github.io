@@ -3,14 +3,11 @@
     --font-mono: go-mono, monospace;
 
     color-scheme: light dark;
-    /* === main colors === */
-    --dark-major: oklch(90% 0.01 157.38);
-    --dark-minor: oklch(80% 0.1 157.38);
-    --light-major: oklch(10% 0.01 157.38);
-    --light-minor: oklch(70% 0.1591 6.22);
+    /* === palette === */
+    --color-major: light-dark(oklch(10% 0.01 157.38),#eee);
+    --color-minor: light-dark(#f38401,#ff66aa);
 
-    --light-bg: oklch(85% 0 0);
-    --dark-bg: oklch(25% 0 0);
+    --color-bg: light-dark(#dddddd, #222222);
 }
 
 *,
@@ -26,7 +23,7 @@
 html,
 body {
     height: 100dvh;
-    background-color: light-dark(var(--light-bg), var(--dark-bg));
+    background-color: var(--color-bg);
 }
 
 main {
@@ -36,7 +33,7 @@ main {
 
 a {
     text-decoration: none;
-    color: light-dark(var(--light-minor), var(--dark-minor));
+    color: var(--color-minor);
 
     &:hover {
         text-decoration: underline;
