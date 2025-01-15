@@ -1,4 +1,6 @@
 baseURL = 'https://proxyerium.github.io/'
 languageCode = 'en-us'
 title = "proxyerium's website"
-theme = "hugo-theme-protheriume"
+
+[[module.imports]]
+path = "github.com/proxyerium/hugo-theme-protheriume"
