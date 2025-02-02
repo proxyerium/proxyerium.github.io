@@ -1,12 +1,12 @@
 :root {
-    /* === fonts === */
+    /* -- fonts -- */
     --font-regular: go, system-ui;
     --font-mono: go-mono, monospace;
 
     color-scheme: light dark;
-    /* === palette === */
-    --color-major: light-dark(oklch(10% 0.01 157.38),#eee);
-    --color-minor: light-dark(#f38401,#ff66aa);
+    /* -- palette -- */
+    --color-major: light-dark(oklch(10% 0.01 157.38), #eee);
+    --color-minor: light-dark(#f38401, #ff66aa);
 
     --color-bg: light-dark(#dddddd, #222222);
 }
@@ -25,10 +25,12 @@ html,
 body {
     height: 100dvh;
     background-color: var(--color-bg);
+
+    display: grid;
+    grid-template-rows: auto 1fr;
 }
 
 main {
-    height: 100dvh;
     display: grid;
 }
 

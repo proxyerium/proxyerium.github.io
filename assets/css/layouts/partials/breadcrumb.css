@@ -1,13 +1,12 @@
-.breadcrump {
+.breadcrumb {
     display: flex;
     flex-direction: row;
-    align-self: center;
+    align-items: center;
 
     white-space: nowrap;
 
     background-color: #111111;
     padding: 1rem 2rem 1rem 1rem;
-
 
     * {
         font-family: var(--font-mono);
@@ -18,15 +17,15 @@
         display: inline-flex;
         font-weight: bold;
 
-        &::before{
+        &::before {
             content: "";
-            border-left: #fff solid .4rem;
-            padding: .5rem;
+            border-left: #fff solid 0.4rem;
+            padding: 0.5rem;
         }
-        & :first-child::before{
+        & :first-child::before {
             content: "~";
         }
-        & :not(:last-child):after{
+        & :not(:last-child):after {
             content: "/";
         }
 
@@ -36,13 +35,15 @@
         }
     }
 
-
     .signage {
-        color: #fff;
-        &::after{
+        width: 100%;
+        &::after {
             content: "_";
-            animation: .5s blinking alternate infinite;
+            animation: 0.5s blinking alternate infinite;
         }
     }
+}
 
+#clock {
+    font-size: 1rem;
 }

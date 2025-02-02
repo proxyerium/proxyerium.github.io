@@ -26,24 +26,31 @@ section.article {
 .article.content {
     margin-top: 1rem;
     flex-wrap: wrap;
-    font-size: 1.4rem;
+    font-size: 1rem;
 
     span {
         white-space: pre-wrap;
     }
 
     /* headings */
-    h2, h3, h4, h5, h6 {
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
         color: light-dark(var(--light-minor), var(--dark-minor));
         margin: 1rem 0 0 0;
         width: fit-content;
 
         &::after {
-            margin-top: .4rem;
-            content: '';
+            margin-top: 0.4rem;
+            content: "";
             display: block;
-            height: .1rem;
-            background-color: light-dark(var(--light-minor), var(--dark-minor) 0%);
+            height: 0.1rem;
+            background-color: light-dark(
+                var(--light-minor),
+                var(--dark-minor) 0%
+            );
         }
     }
 
@@ -60,7 +67,11 @@ section.article {
     /* blockquote */
     blockquote {
         margin: 1rem 0;
-        background: linear-gradient(to right, var(--dark-minor), var(--dark-bg) 60%);
+        background: linear-gradient(
+            to right,
+            var(--dark-minor),
+            var(--dark-bg) 60%
+        );
     }
 
     pre {
@@ -84,7 +95,7 @@ section.article {
 
             counter-reset: line;
             > span {
-                margin: .2rem auto;
+                margin: 0.2rem auto;
                 padding-left: 4rem;
                 position: relative;
                 /* === line numbers === */
@@ -111,7 +122,6 @@ section.article {
     code {
         background-color: rgb(35, 102, 102);
     }
-
 
     img {
         width: 60%;
