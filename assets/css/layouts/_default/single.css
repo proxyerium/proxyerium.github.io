@@ -1,3 +1,4 @@
-.single {
-    grid-template-rows: min-content auto;
+#single {
+    display: grid;
+    justify-content: center;
 }

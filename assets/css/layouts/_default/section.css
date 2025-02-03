@@ -1,5 +1,4 @@
-.section {
-    grid-template-rows: auto 1fr auto;
-    align-content: start;
-    justify-items: center;
+#section {
+    display: grid;
+    grid-template-rows: 1fr;
 }

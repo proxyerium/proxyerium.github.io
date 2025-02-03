@@ -2,13 +2,9 @@
     padding: 0 20dvw;
 
     display: grid;
-    grid-template-columns: auto auto;
-    column-gap: 2rem;
+    grid-template-columns: 2fr 1fr;
+    column-gap: 5vw;
     align-content: center;
-
-    > * {
-        padding: 2rem;
-    }
 }
 
 #home_dashboard {
@@ -22,7 +18,9 @@
 }
 #home_dashboard_links {
     display: flex;
+    justify-content: center;
     align-items: center;
+    gap: 0.5rem;
 }
 
 #home_category {
@@ -42,5 +40,19 @@
             background-color: var(--color-minor);
             border-color: var(--color-major);
         }
+    }
+}
+
+svg {
+    width: 32px;
+    height: 32px;
+    stroke-width: 1.75;
+    stroke: var(--color-major);
+
+    /* padding: 1rem; */
+
+    &:hover {
+        background-color: var(--color-minor);
+        transition: background-color 0.2s ease-in-out;
     }
 }

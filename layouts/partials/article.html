@@ -1,14 +1,21 @@
-<section class="article">
-    <header class="article header">
+<section id="article">
+    <header id="article_header">
         <h1>{{ .Title }}</h1>
         {{ if eq .Kind "page" }}
-            <small>
-                <li>created {{ .Date.Format "2006-01-02" }}</li>
-            </small>
+        <small>
+            <li>{{ .Date.Format "2006-01-02" }} created</li>
+        </small>
         {{ end }}
     </header>
 
-    <article class="article content">
+    <article id="article_content">
         {{ .Content }}
     </article>
+
+    <script defer>
+        document.querySelectorAll('code[data-lang]').forEach((element) => {
+            element.parentElement.parentElement
+                .setAttribute('data-lang', element.getAttribute('data-lang'));
+        });
+    </script>
 </section>
