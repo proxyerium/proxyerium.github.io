@@ -1,0 +1,12 @@
+:root {
+  color-scheme: light dark;
+  --bg-color: light-dark(#eee, #222);
+}
+
+html,
+body {
+  height: 100vh;
+  margin: 0;
+
+  background-color: var(--bg-color);
+}

@@ -1,0 +1,23 @@
+---
+layout: layouts/base.vto
+---
+
+<p>post list</p>
+<a href="..">back</a>
+<div>
+
+    {{for result of results}}
+    <a href="{{result.url}}">
+        <p>{{result.title}} <br> {{result.date |> date('DATETIME')}}</p>
+    </a>
+    {{/for}}
+
+    {{if pagination.previous }}
+    <a href="{{pagination.previous}}">prev page</a>
+    {{/if}}
+
+    {{if pagination.next }}
+    <a href="{{pagination.next}}">next page</a>
+    {{/if}}
+
+</div>

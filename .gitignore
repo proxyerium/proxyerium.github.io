@@ -1,3 +1,2 @@
-public/
-.vscode/
-*.lock
+_site
+_cache
