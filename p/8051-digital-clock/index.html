@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <title>proxyerium's blog</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/styles.css">
+    </head>
+
+    <body>
+        <a href="..">back</a>
+<p>我刚接触bms时，心血来潮想自己做个手台。但我的电子科技知识匮乏，动手能力也差，只是稍微看了些设计方案就草率开始行动——最终是毫无悬念的大失败：焊坏了3个焊盘、浪费了15张PCB、吃灰了一堆元件，我忏悔😭。对此一直耿耿于怀，所以大学加个社团，看看能不能进去学点什么再去追求我未竟的夙愿；当然不止手台，我还有很多别的小玩具想做。</p>
+<p>社团首先介绍51系的单片机，我起初做手台尝试的Arduino，虽然Arduino也算简单的，但51事实地更简单，确实应该是我首先应该看看的。</p>
+<p>本篇记录我对社团发的考核任务的实现方案。</p>
+<hr>
+<h2>任务内容</h2>
+<p>题目抽签来的，抽到个比较简单的😏：</p>
+<pre><code class="language-txt">电子时钟
+
+基础部分：
+1.无论什么情况，当有按键按下蜂鸣器会响一声（10分）
+2.可以通过按键设置时间（切换时分秒），并有基本的时间功能，复位默认05：00：00用 24 小时制（20分）。
+3.实现秒表功能，秒暂停键按下停止计时，秒复位键按下後，秒回到00（20分）
+4.通过按键实现闹钟设置功能，闹钟时间到蜂鸣器响5次，闹钟时间自己可自己设定（20分）
+发挥部分：
+1.通过按键可设定日期并显示 （10分）。
+2.通过按键实现计时器的功能，即设定时间进行倒计时，倒计时时间可暂停默认10分钟，(也可自己设定)，倒计时结束蜂鸣器响3下或者LED闪烁3次（15分）
+3.基础部分第3点当秒表停止计时时，可用存储模块储存记录时间数据，并复现（5分）
+</code></pre>
+<h2>我的方案</h2>
+<h3>材料清单</h3>
+<p><img src="mcu.webp" alt="普中51-实验板（STC89C52RC芯片）"></p>
+<p>这就是全部了。我没有预先买任何材料，连这个也是从社团借来的。实现电子时钟应该要用上 <em>LCD1602</em> 模块，但是这块实验板上自带的模块已经足够实现题目要求的所有功能。既然如此，那就没有必要再买什么了😝。</p>
+<h3>开发环境</h3>
+<p>社团用的环境是 <em>keil5</em> + <em>stc-isp</em>。</p>
+<p>keil5算是老东西了，没有黑暗主题和自动补全，更不必说其他功能，我要用更现代的环境那就要另寻他法：</p>
+<p>编译器<a href="https://sdcc.sourceforge.net">SDCC</a> + 开发环境<a href="https://github.com/github0null/eide">EIDE</a> + 下载器<a href="https://github.com/grigorig/stcgal">stcgal</a></p>
+<p>刚开始遇上一堆问题，工作环境配置、keil和sdcc的语法差异、链接器报错之类的，还好都平稳解决，搞特殊果然总是麻烦一点🤐。</p>
+<h3>总体思路</h3>
+<p>使用实验板自带的两个 <em>3461AS</em> 数码管、蜂鸣器，以及四个独立按键，实现所有功能。</p>
+<p>就设置成5种模式：</p>
+<ol>
+<li>时钟 <code>clock()</code></li>
+<li>日期 <code>date()</code> <br>
+算闰年的代码占了好多空间……</li>
+<li>闹钟 <code>alarm()</code></li>
+<li>秒表 <code>timer()</code> <br>
+秒表最多储存10个时间数据，没有必要做太多。</li>
+<li>沙漏 <code>sandglass()</code></li>
+</ol>
+<p>总体结构是用4个按键构成多级菜单，分别控制各个模式，结构示意如下：</p>
+<blockquote>
+<p>“｜”後的表示长按触发的功能</p>
+</blockquote>
+<pre><code class="language-txt">K1 -&gt; Clock Mode | Date Mode
+    K1 -&gt; toggle format
+    K2 -&gt; setting
+        K1 -&gt; toggle unit | apply
+        K2 -&gt; minus
+        K3 -&gt; plus
+        K4 -&gt; go back
+    K3 -&gt; reset
+    K4 -&gt; go back
+
+K2 -&gt; Alarm Mode
+    K1 -&gt; toggle unit | apply
+    K2 -&gt; minus
+    K3 -&gt; plus
+    K4 -&gt; go back
+
+K3 -&gt; Timer Mode
+    K1 -&gt; start/pause | load
+        K1 -&gt; clear
+        K2 -&gt; previous
+        K3 -&gt; next
+        K4 -&gt; go back
+    K2 -&gt; save
+    K3 -&gt; reset
+    K4 -&gt; go back
+
+K4 -&gt; Sandglass Mode
+    K1 -&gt; start/pause
+    K2 -&gt; setting
+        K1 -&gt; toggle unit | apply
+        K2 -&gt; minus
+        K3 -&gt; plus
+        K4 -&gt; go back
+    K3 -&gt; reset
+    K4 -&gt; go back
+</code></pre>
+<h3>按键功能</h3>
+<p>实验板上那矩阵键盘的16个按钮也能用，但是感觉不方便管理，就用4个得了；也没有那么多功能需要用到长按，所以长按只写在K1里。</p>
+<h3>定时器和中断系统</h3>
+<p>用到了 <code>T0</code> <code>T1</code> 两个内部定时器。</p>
+<p><code>T0</code> 用于需要触发的模式：计时器和沙漏，用户通过按钮控制 <code>TR0</code> ，状态为开启时才工作；</p>
+<p><code>T1</code> 用于需要持续运行的模式：时钟和闹钟，日期等着时钟的溢加就得，所以没有放进去。</p>
+<h3>process类方法</h3>
+<p>这类方法通过中断系统的执行来处理各个功能的运行逻辑，只需考虑溢加和各单位的进位就得。</p>
+<h3>setting类方法</h3>
+<p>这类方法让用户调整时间数据，和process类一样只需注意进位，不同之处是多了下溢的情况。</p>
+<p>unsigned char 类型的数值范围是0~255，发生下溢时会从0跳至255。</p>
+<h2>遭遇的问题</h2>
+<p>没有遇到难以逾越的障碍，基本是一些细枝末节卡得我发慌，然後突然莫名其妙地全部迎刃而解😩。</p>
+<ul>
+<li>忘记打开中断系统的总开关(EA)；</li>
+<li><code>switch</code> 的每个 <code>case</code> 都要加上 <code>break;</code> 否则它会继续往下执行；</li>
+</ul>
+<h2>没实现的效果</h2>
+<ul>
+<li><strong>根菜单是空的</strong> <br>
+就显示了个 <code>[------]</code> ，其实可以设定个默认模式之类的，但是懒得弄了。</li>
+<li><strong>74HC595</strong> <br>
+用 <em>74HC245</em> 驱动的数码管，但是控制数码管显示位的引脚和那一排LED的是共用的，所以有三个LED总是常亮，想换 <em>74HC595</em> 驱动数码管，但是懒得学了。</li>
+<li><strong>按键位置不合适</strong> <br>
+Timer读取历史记录时是K1按钮清空历史数据，应该把调整加减的按钮全设为K1和K2才对，这样清零和复位就都放在K3了，但是懒得挪了。</li>
+<li><strong>数码管闪烁</strong> <br>
+本来以为 <code>delay()</code> 没办法实现的，做完才想到其实也能行的，但是懒得再搞了。</li>
+<li><strong>统一蜂鸣器频率</strong> <br>
+忘记了，懒得调了。</li>
+</ul>
+<p>总结与反思：懒得。</p>
+<h2>收尾</h2>
+<p>这算是我第一个正经做出来的项目呢，前前後後写了两周多，最终还挺像那么一回事。这个项目不会再更新了，毕竟只是个小小的作业而已，做完之後就把板子还回去了，没机会再调试。</p>
+<h2>参考资料</h2>
+<p><a href="https://www.stcmicro.com/datasheet/STC89C51RC-cn.pdf">普中官方数据手册</a></p>
+<p><a href="https://www.bilibili.com/video/BV1Mb411e7re">51单片机入门教程-2020版 - Bilibili</a></p>
+<p><a href="https://www.bilibili.com/video/BV1YV4y1K72Q">入坑单片机--[12] - Bilibili</a></p>
+
+
+    </body>
+
+</html>
