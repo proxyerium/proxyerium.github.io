@@ -8,7 +8,7 @@ layout: layouts/base.vto
 
     {{for result of results}}
     <a href="{{result.url}}">
-        <p>{{result.title}} <br> {{result.date |> date('DATETIME')}}</p>
+        <p>{{result.title}} <br> {{result.date |> date('yyyy-MM-dd HH:mm')}}</p>
     </a>
     {{/for}}
 
