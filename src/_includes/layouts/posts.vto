@@ -13,11 +13,13 @@ layout: layouts/base.vto
     {{/for}}
 
     {{if pagination.previous }}
-    <a href="{{pagination.previous}}">prev page</a>
+    <a href="{{pagination.previous}}">prev⬅</a>
     {{/if}}
 
+    <span>{{pagination.page}} of {{pagination.totalPages}}</span>
+
     {{if pagination.next }}
-    <a href="{{pagination.next}}">next page</a>
+    <a href="{{pagination.next}}">➡next</a>
     {{/if}}
 
 </div>
