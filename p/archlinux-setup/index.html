@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-
-    <head>
-        <meta charset="UTF-8" />
+<html lang="en"><head>
+        <meta charset="UTF-8">
         <title>proxyerium's blog</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/styles.css">
@@ -10,66 +8,65 @@
 
     <body>
         <a href="..">back</a>
-<p>Archlinux wiki很完善，安装只需要照着文档做一遍就会了。不过每次安装总看wiki挺麻烦的，流程记下来方便以後安装。</p>
+<p>Archlinux wiki 很完善，安装只需要照着文档做一遍就会了。不过每次安装总看 wiki 挺麻烦的，流程记下来方便以後安装。</p>
 <h2>基本</h2>
-<h3>iwctl联网</h3>
-<pre><code class="language-shell">device list # 列出网卡
+<h3>iwctl 联网</h3>
+<pre><code class="language-shell hljs">device list # 列出网卡
 station &lt;device&gt; scan
 station &lt;device&gt; get-networks
 station &lt;device&gt; connect &lt;SSID&gt;
 </code></pre>
 <h3>硬盘分区</h3>
-<pre><code class="language-shell">fdisk -l &lt;disk&gt;
+<pre><code class="language-shell hljs">fdisk -l &lt;disk&gt;
 fdisk &lt;disk&gt; # 进入fdisk命令行
-fdisk&gt;&gt; g # 新建GPT分区表
-fdisk&gt;&gt; n # 新建分区
-
-fdisk&gt;&gt; t # 更改分区类型
-# 1:  EFI
-# 19: swap
-# 23: x86-64-root
-fdisk&gt;&gt; w
+<span class="hljs-meta prompt_">fdisk&gt;</span><span class="language-bash">&gt; g <span class="hljs-comment"># 新建GPT分区表</span></span>
+<span class="hljs-meta prompt_">fdisk&gt;</span><span class="language-bash">&gt; n <span class="hljs-comment"># 新建分区</span></span>
+<span class="hljs-meta prompt_">
+fdisk&gt;</span><span class="language-bash">&gt; t <span class="hljs-comment"># 更改分区类型</span></span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">1:  EFI</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">19: swap</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">23: x86-64-root</span>
+<span class="hljs-meta prompt_">fdisk&gt;</span><span class="language-bash">&gt; w</span>
 </code></pre>
 <h3>格式化分区</h3>
-<pre><code class="language-shell">mkfs.ext4 &lt;root_partition&gt;
+<pre><code class="language-shell hljs">mkfs.ext4 &lt;root_partition&gt;
 mkfs.fat -F 32 &lt;EFI_partition&gt;
 mkswap &lt;swap_partition&gt;
 </code></pre>
 <h3>挂载分区</h3>
-<pre><code class="language-shell">mount &lt;root_partition&gt; /mnt
+<pre><code class="language-shell hljs">mount &lt;root_partition&gt; /mnt
 mount --mkdir &lt;EFI_partition&gt; /mnt/boot
 swapon &lt;swap_partition&gt;
 </code></pre>
 <h3>安装系统</h3>
-<pre><code class="language-shell">cat &lt;&lt;'eof' &gt; /etc/pacman.d/mirrorlist
-Server = https://mirrors.cernet.edu.cn/archlinux/$repo/os/$arch
-eof
-
-# 安装所需软件包，ucode根据实际选择amd-ucode或intel-ucode
+<pre><code class="language-shell hljs"><span class="hljs-meta prompt_"># </span><span class="language-bash">换镜像源</span>
+sed -i '1iServer = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch' /etc/pacman.d/mirrorlist
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">安装所需软件包，ucode根据cpu实际选择amd-ucode或intel-ucode</span>
 pacstrap -K /mnt base linux linux-firmware intel-ucode networkmgr nvim grub efibootmgr
 </code></pre>
 <h3>配置系统</h3>
-<pre><code class="language-shell">genfstab -U /mnt &gt;&gt; /mnt/etc/fstab
+<pre><code class="language-shell hljs">genfstab -U /mnt &gt;&gt; /mnt/etc/fstab
 arch-chroot /mnt
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 hwclock --systohc
-vim /etc/locale.gen # 取消注释&quot;en_US.UTF-8&quot;
+vim /etc/locale.gen # 取消注释"en_US.UTF-8"
 locale-gen
 echo LANG=en_US.UTF-8 &gt;&gt; /etc/locale.conf
 echo &lt;hostname&gt; &gt;&gt; /etc/hostname
 passwd # 记得改密码
 </code></pre>
 <h3>bootloader</h3>
-<pre><code class="language-shell">grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+<pre><code class="language-shell hljs">grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 grub-mkconfig -o &lt;EFI_partition&gt;/grub/grub.cfg
 </code></pre>
 <h2>其他</h2>
-<h3>N卡驱动 <s>fxxk you</s></h3>
-<pre><code class="language-shell">pacman -S nvidia nvidia-utils nvidia-setting
+<h3>N 卡驱动 <s>fxxk you</s></h3>
+<pre><code class="language-shell hljs">pacman -S nvidia nvidia-utils nvidia-setting
 </code></pre>
 <h2>参考资料</h2>
-<p><a href="https://wiki.archlinux.org/title/Installation_guide">Archlinux安装指南</a></p>
-<p><a href="https://help.mirrors.cernet.edu.cn/archlinux/">MirrorZ校园联合镜像站</a></p>
+<p><a href="https://wiki.archlinux.org/title/Installation_guide">Archlinux 安装指南</a></p>
+<p><a href="https://help.mirrors.cernet.edu.cn/archlinux/">MirrorZ 校园联合镜像站</a></p>
 <h2>Changelog</h2>
 <table>
 <thead>
@@ -79,6 +76,10 @@ grub-mkconfig -o &lt;EFI_partition&gt;/grub/grub.cfg
 </tr>
 </thead>
 <tbody>
+<tr>
+<td style="text-align:center">2025-06-20</td>
+<td style="text-align:center">用 sed 换镜像源，之前的方法会覆写原有的</td>
+</tr>
 <tr>
 <td style="text-align:center">2024-10-13</td>
 <td style="text-align:center">又踩到自己挖的坑，修一下</td>
@@ -91,6 +92,7 @@ grub-mkconfig -o &lt;EFI_partition&gt;/grub/grub.cfg
 </table>
 
 
-    </body>
+    
 
-</html>
+
+</body></html>

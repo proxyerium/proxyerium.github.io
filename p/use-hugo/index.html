@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-
-    <head>
-        <meta charset="UTF-8" />
+<html lang="en"><head>
+        <meta charset="UTF-8">
         <title>proxyerium's blog</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/styles.css">
@@ -22,13 +20,13 @@
 <p>Hugo分为standard和extended两个版本。区别是extended版本会把图片处理成WebP格式的，还有自带的sass处理器。两者的占用相差也不大，一般情况都选择extended即可。</p>
 <h2>目录结构</h2>
 <p>完成安装後，选择合适的路径，输入:</p>
-<pre><code class="language-shell">hugo new site my-site
+<pre><code class="language-shell hljs">hugo new site my-site
 cd my-site/
 git init
 </code></pre>
 <p>这样就创建了一个名为<code>my-site</code>的新项目，<br>
 目录结构如图所示：</p>
-<pre><code class="language-txt">my-site/
+<pre><code class="language-txt hljs language-plaintext">my-site/
 ├── archetypes/         &lt;-- 文章模板，统一文章格式
 ├── assets/             &lt;-- 全局资源，图片、样式、脚本之类
 ├── content/            &lt;-- 网站内容，组织网站主要内容
@@ -40,7 +38,7 @@ git init
 └── hugo.toml           &lt;-- 配置文件，网站的全局配置
 </code></pre>
 <p>现在可以启动hugo自带的网页服务器，方便在本地调试网站。访问默认地址<code>127.0.0.1:1313</code>观察网页效果：</p>
-<pre><code class="language-shell">hugo serve
+<pre><code class="language-shell hljs">hugo serve
 </code></pre>
 <h2>安装主题</h2>
 <p>不出意外的话，访问hugo服务首先映入眼帘的，只有page not found一行。
@@ -50,8 +48,8 @@ git init
 我之前使用<a href="https://github.com/CaiJimmy/hugo-theme-stack">stack</a>，很干净的主题，
 不过这一次我想自己做主题，试图锻炼我的审美。</p>
 <p>主题使用Git的子模块管理，把中意的主题作为子模块拉到<code>theme/&lt;theme-name&gt;</code>文件夹，再修改一行配置文件即可：</p>
-<pre><code class="language-shell">git submodule add https://github.com/CaiJimmy/hugo-theme-stack.git theme/stack
-echo &quot;theme = 'stack'&quot; &gt;&gt; hugo.toml
+<pre><code class="language-shell hljs">git submodule add https://github.com/CaiJimmy/hugo-theme-stack.git theme/stack
+echo "theme = 'stack'" &gt;&gt; hugo.toml
 </code></pre>
 <p>现在应该能正常呈现网站内容了。</p>
 <h2>内容管理</h2>
@@ -60,7 +58,7 @@ echo &quot;theme = 'stack'&quot; &gt;&gt; hugo.toml
 分两种，<strong>leaf bundle</strong> 和 <strong>branch bundle</strong>。</p>
 <h3>leaf bundle</h3>
 <p>把内容及其所需的资源统放到一个文件夹里，其中包含一个<code>index.md</code>，形成一个leaf bundle。譬如一个about/文件夹，其中有一篇文章和一张图片。</p>
-<pre><code class="language-txt">content/
+<pre><code class="language-txt hljs language-plaintext">content/
 └── leaf/
     ├── index.md
     └── cover.jpg
@@ -69,7 +67,7 @@ echo &quot;theme = 'stack'&quot; &gt;&gt; hugo.toml
 <p>leaf喻为植物形态的末端，不再有后继，是内容管理的基本单元。</p>
 <h3>branch bundle</h3>
 <p>而branch bundle则更高一层，可用作目录，包含任意数量的子文件夹，其中包含一个<code>_index.md</code>。</p>
-<pre><code class="language-txt">content/
+<pre><code class="language-txt hljs language-plaintext">content/
 ├── branch/
 │   ├── leaf-a/
 │   │   └── index.md
@@ -83,20 +81,20 @@ content/作为顶层文件夹，肯定是一个brach bundle，其中的branch/�
 <p>page bundle组织彼此相关联的内容，避免什么东西都往<code>static/</code>或<code>assets/</code>这两个公共资源文件夹里放。</p>
 <h2>配置文件</h2>
 <p>Hugo默认在新的项目生成一个全局配置文件<code>hugo.toml</code>：</p>
-<pre><code class="language-toml"># hugo.toml
-baseURL = 'https://example.org/'
-languageCode = 'en-us'
-title = 'My New Hugo Site'
-theme = 'stack'
+<pre><code class="language-toml hljs language-ini"><span class="hljs-comment"># hugo.toml</span>
+<span class="hljs-attr">baseURL</span> = <span class="hljs-string">'https://example.org/'</span>
+<span class="hljs-attr">languageCode</span> = <span class="hljs-string">'en-us'</span>
+<span class="hljs-attr">title</span> = <span class="hljs-string">'My New Hugo Site'</span>
+<span class="hljs-attr">theme</span> = <span class="hljs-string">'stack'</span>
 </code></pre>
 <p><code>title</code>是浏览器标签页的标题，随意修改；<br>
 <code>baseURL</code>定义网站的基本url，作为所有相对链接的绝对参照点，乱填可能会导致资源无法正确定位。
-我使用Github Action部署网站，所以写&quot;https://proxyerium.github.io/&quot;，<strong>注意尾部一定要有斜杠</strong>。</p>
+我使用Github Action部署网站，所以写"https://proxyerium.github.io/"，<strong>注意尾部一定要有斜杠</strong>。</p>
 <h2>部署网站</h2>
 <p>部署网站有许多方法，参考<a href="https://gohugo.io/hosting-and-deployment/">官方文档</a>。我还没尝试过Github Action以外的方法，暂且只写这一种 :P</p>
 <h3>Github Actions</h3>
 <ol>
-<li>远程仓库，找到Settings -&gt; Pages -&gt; Source，改成&quot;Github Actions&quot;。</li>
+<li>远程仓库，找到Settings -&gt; Pages -&gt; Source，改成"Github Actions"。</li>
 <li>本地仓库，创建工作流脚本<code>.github/workflows/hugo.yaml</code>，用官方提供的<a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/#procedure">工作流模板</a>即可，唯独留心里面的<code>HUGO_VERSION</code>对应自己正在使用的版本，免得兼容问题。</li>
 <li>整理好所有内容後推送到远程仓库。</li>
 <li>找到远程仓库顶部Actions标签页，观赏action流程，完成後便能访问部署好的网站，大功告成！</li>
@@ -132,6 +130,7 @@ theme = 'stack'
 </table>
 
 
-    </body>
+    
 
-</html>
+
+</body></html>

@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-
-    <head>
-        <meta charset="UTF-8" />
+<html lang="en"><head>
+        <meta charset="UTF-8">
         <title>proxyerium's blog</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/styles.css">
@@ -14,25 +12,25 @@
 <p>在库里点开Darkest Dungeon -&gt; 齿轮图标 -&gt; 管理（Manage） -&gt; 浏览本地文件（Browse local files）</p>
 <p>现在的位置应该是 <code>..\Steam\steamapps\common\DarkestDungeon\</code>，再进入到<code>_windows\</code>。</p>
 <p>双击其中的 <strong>steam_workshop_upload.exe</strong>，此时程序会创建一个 “<em>sample_project.xml</em>”（这个xml可以随意改名，一般改成“<em>project.xml</em>”）：</p>
-<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;project&gt;
- &lt;ItemDescriptionShort/&gt;
- &lt;ModDataPath&gt;c:/absolute_path_to_your_mod_folders_data_directory/data&lt;/ModDataPath&gt;
- &lt;Title&gt;Your Mod Title here&lt;/Title&gt;
- &lt;Language&gt;english&lt;/Language&gt;
- &lt;UpdateDetails&gt;When you update your mod, this is where you would describe your latest changes&lt;/UpdateDetails&gt;
- &lt;Visibility&gt;private&lt;/Visibility&gt;
- &lt;UploadMode&gt;direct_upload&lt;/UploadMode&gt;
- &lt;VersionMajor&gt;0&lt;/VersionMajor&gt;
- &lt;VersionMinor&gt;0&lt;/VersionMinor&gt;
- &lt;TargetBuild&gt;0&lt;/TargetBuild&gt;
- &lt;Tags&gt;
-  &lt;Tags&gt;tag1&lt;/Tags&gt;
-  &lt;Tags&gt;tag2&lt;/Tags&gt;
- &lt;/Tags&gt;
- &lt;ItemDescription&gt;Describe your mod in 8000
-characters or less here!&lt;/ItemDescription&gt;
-&lt;/project&gt;
+<pre><code class="language-xml hljs"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"utf-8"</span>?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">project</span>&gt;</span>
+ <span class="hljs-tag">&lt;<span class="hljs-name">ItemDescriptionShort</span>/&gt;</span>
+ <span class="hljs-tag">&lt;<span class="hljs-name">ModDataPath</span>&gt;</span>c:/absolute_path_to_your_mod_folders_data_directory/data<span class="hljs-tag">&lt;/<span class="hljs-name">ModDataPath</span>&gt;</span>
+ <span class="hljs-tag">&lt;<span class="hljs-name">Title</span>&gt;</span>Your Mod Title here<span class="hljs-tag">&lt;/<span class="hljs-name">Title</span>&gt;</span>
+ <span class="hljs-tag">&lt;<span class="hljs-name">Language</span>&gt;</span>english<span class="hljs-tag">&lt;/<span class="hljs-name">Language</span>&gt;</span>
+ <span class="hljs-tag">&lt;<span class="hljs-name">UpdateDetails</span>&gt;</span>When you update your mod, this is where you would describe your latest changes<span class="hljs-tag">&lt;/<span class="hljs-name">UpdateDetails</span>&gt;</span>
+ <span class="hljs-tag">&lt;<span class="hljs-name">Visibility</span>&gt;</span>private<span class="hljs-tag">&lt;/<span class="hljs-name">Visibility</span>&gt;</span>
+ <span class="hljs-tag">&lt;<span class="hljs-name">UploadMode</span>&gt;</span>direct_upload<span class="hljs-tag">&lt;/<span class="hljs-name">UploadMode</span>&gt;</span>
+ <span class="hljs-tag">&lt;<span class="hljs-name">VersionMajor</span>&gt;</span>0<span class="hljs-tag">&lt;/<span class="hljs-name">VersionMajor</span>&gt;</span>
+ <span class="hljs-tag">&lt;<span class="hljs-name">VersionMinor</span>&gt;</span>0<span class="hljs-tag">&lt;/<span class="hljs-name">VersionMinor</span>&gt;</span>
+ <span class="hljs-tag">&lt;<span class="hljs-name">TargetBuild</span>&gt;</span>0<span class="hljs-tag">&lt;/<span class="hljs-name">TargetBuild</span>&gt;</span>
+ <span class="hljs-tag">&lt;<span class="hljs-name">Tags</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Tags</span>&gt;</span>tag1<span class="hljs-tag">&lt;/<span class="hljs-name">Tags</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">Tags</span>&gt;</span>tag2<span class="hljs-tag">&lt;/<span class="hljs-name">Tags</span>&gt;</span>
+ <span class="hljs-tag">&lt;/<span class="hljs-name">Tags</span>&gt;</span>
+ <span class="hljs-tag">&lt;<span class="hljs-name">ItemDescription</span>&gt;</span>Describe your mod in 8000
+characters or less here!<span class="hljs-tag">&lt;/<span class="hljs-name">ItemDescription</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">project</span>&gt;</span>
 
 </code></pre>
 <p>并打开一个命令行形式的文档，这个文档会说明一个创意工坊模组需要什么元数据。</p>
@@ -51,12 +49,13 @@ characters or less here!&lt;/ItemDescription&gt;
 </blockquote>
 <p>应该是权限问题，以管理员身份运行 steam_workshop_upload.exe 即可；</p>
 <p>如果管理员身份打开的窗口不能拖放文件，那就用命令行的方式打开，路径作为参数传入即可：</p>
-<pre><code class="language-powershell">steam_workshop_upload.exe &quot;C:\path_to_mod_folder\project.xml&quot;
+<pre><code class="language-powershell hljs">steam_workshop_upload.exe <span class="hljs-string">"C:\path_to_mod_folder\project.xml"</span>
 </code></pre>
 <h2>参考资料</h2>
 <p><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=819597757">Steam Community - Modding Guide [Official]</a></p>
 
 
-    </body>
+    
 
-</html>
+
+</body></html>
