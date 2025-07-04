@@ -7,11 +7,11 @@ tags: [game]
 
 先定位到本地文件夹：
 
-在库里点开Darkest Dungeon -> 齿轮图标 -> 管理（Manage） -> 浏览本地文件（Browse local files）
+在库里点开 Darkest Dungeon -> 齿轮图标 -> 管理（Manage） -> 浏览本地文件（Browse local files）
 
 现在的位置应该是 `..\Steam\steamapps\common\DarkestDungeon\`，再进入到`_windows\`。
 
-双击其中的 **steam_workshop_upload.exe**，此时程序会创建一个 “*sample_project.xml*”（这个xml可以随意改名，一般改成“*project.xml*”）：
+双击其中的 **steam_workshop_upload.exe**，此时程序会创建一个 “_sample_project.xml_”（这个 xml 可以随意改名，一般改成“_project.xml_”）：
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -38,17 +38,17 @@ characters or less here!</ItemDescription>
 
 并打开一个命令行形式的文档，这个文档会说明一个创意工坊模组需要什么元数据。
 
-把这个xml文件移动到要做成Mod的那个文件夹的**根目录**。
+把这个 xml 文件移动到要做成 Mod 的那个文件夹的**根目录**。
 
 然後按需修改对应的元数据，值得注意有三个必填项：
 
-- `<ModDataPath>` Mod文件夹在本机的绝对路径
-- `<Visibility>` Mod在创意工坊的访问权限
+- `<ModDataPath>` Mod 文件夹在本机的绝对路径
+- `<Visibility>` Mod 在创意工坊的访问权限
 - `<UploadMode>` 上传方式，通常“direct_upload”就行
 
-填好以後把 project.xml 拖进窗口，等待程序处理完成後，xml里会多一个steam给这个Mod分配的唯一`<PublishedFileId>`。完毕。
+填好以後把 project.xml 拖进窗口，等待程序处理完成後，xml 里会多一个 steam 给这个 Mod 分配的唯一`<PublishedFileId>`。完毕。
 
-还有一点，後续Mod有更新的话记得也是在这个文件夹里做改动，依旧注意`<ModDataPath>`是否有效。
+还有一点，後续 Mod 有更新的话记得也是在这个文件夹里做改动，依旧注意`<ModDataPath>`是否有效。
 
 ## 遭遇问题
 

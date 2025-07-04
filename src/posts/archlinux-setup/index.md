@@ -1,6 +1,6 @@
 ---
 title: 'Archlinux安装'
-date: 2024-01-17T18:27:12+08:00
+date: 2024-01-17T18:27:12Z
 slug: archlinux-setup
 tags: [linux]
 ---

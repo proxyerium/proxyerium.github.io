@@ -1,7 +1,7 @@
 ---
-title: "Test"
-date: 2006-01-02T15:04:05+00:00
-slug: "test"
+title: 'Test'
+date: 2006-01-02T15:04:05Z
+slug: 'test'
 tags: []
 ---
 
@@ -36,18 +36,18 @@ _Emphasized text_
 
 ### Unordered List
 
--   First item
--   Second item
--   Third item
+- First item
+- Second item
+- Third item
 
 ### Nested List
 
 1. First item
-    - Subitem 1
-    - Subitem 2
+   - Subitem 1
+   - Subitem 2
 2. Second item
-    - Subitem 1
-    - Subitem 2
+   - Subitem 1
+   - Subitem 2
 
 ## Links
 
