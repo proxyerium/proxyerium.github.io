@@ -8,25 +8,25 @@
 
     <body>
         <a href="..">back</a>
-<p>想试试新的root方案 <em>KernelSU</em> ，但我手机的内核版本是4.19，用不得通用内核镜像，需要自行编译内核，幸好KernelSU的<a href="https://kernelsu.org/zh_CN/guide/unofficially-support-devices.html">非官方支持列表</a>中有大佬在维护picasso的内核源码。</p>
+<p>想试试新的 root 方案 <em>KernelSU</em> ，但我手机的内核版本是 4.19，用不得通用内核镜像，需要自行编译内核，幸好 KernelSU 的<a href="https://kernelsu.org/zh_CN/guide/unofficially-support-devices.html">非官方支持列表</a>中有大佬在维护 picasso 的内核源码。</p>
 <p>本篇记录我借助 <strong>@EndCredits</strong> 大佬维护的<a href="https://github.com/EndCredits/kernel_xiaomi_sm7250">kernel_xiaomi_sm7250</a>给我的手机编译内核。</p>
 <h2>搭建环境</h2>
-<p>写了个dockerfile简化环境搭建，刚接触docker的时候不知道dockerfile，每次开新容器都要手动再配一遍环境，累到癫去😢。</p>
+<p>写了个 dockerfile 简化环境搭建，刚接触 docker 的时候不知道 dockerfile，每次开新容器都要手动再配一遍环境，累到癫去 😢。</p>
 <pre><code class="language-sh hljs language-bash">git <span class="hljs-built_in">clone</span> https://github.com/Proxyerium/picasso-build-host.git
 <span class="hljs-built_in">cd</span> picasso-build-host
 docker build --<span class="hljs-built_in">rm</span> -t picasso-build-host .
 </code></pre>
-<p>等待docker镜像生成完毕，然後运行一个虚拟机：</p>
+<p>等待 docker 镜像生成完毕，然後运行一个虚拟机：</p>
 <pre><code class="language-sh hljs language-bash">docker run -it --name picasso picasso-build-host
 </code></pre>
-<h2>集成KernelSU</h2>
+<h2>集成 KernelSU</h2>
 <blockquote>
-<p>如果curl连接失败的话，换个DNS试试</p>
+<p>如果 curl 连接失败的话，换个 DNS 试试</p>
 </blockquote>
-<p>将KernelSU添加到内核源码的根目录：</p>
+<p>将 KernelSU 添加到内核源码的根目录：</p>
 <pre><code class="language-sh hljs language-bash">curl -LSs <span class="hljs-string">"https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh"</span> | bash -
 </code></pre>
-<p>defconfig中添加相关配置：</p>
+<p>defconfig 中添加相关配置：</p>
 <pre><code class="language-sh hljs language-bash"><span class="hljs-built_in">echo</span> -e <span class="hljs-string">"CONFIG_KPROBES=y\nCONFIG_HAVE_KPROBES=y\nCONFIG_KPROBE_EVENTS=y"</span> &gt;&gt; ./arch/arm64/configs/vendor/picasso_user_defconfig
 </code></pre>
 <h2>编译内核</h2>

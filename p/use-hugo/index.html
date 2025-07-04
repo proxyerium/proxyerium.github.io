@@ -9,15 +9,15 @@
     <body>
         <a href="..">back</a>
 <p><a href="https://gohugo.io/">Hugo</a>是一个优秀的静态网页生成框架，适合博客或小型文档之类的没有动态数据交互的网页应用。
-一直打算翻新博客，尝试过朴素三大件、也试过一些其他框架，但因为水平太次最终还是回来投奔Hugo。本篇介绍hugo的基本结构及用法。</p>
-<h2>安装Hugo</h2>
+一直打算翻新博客，尝试过朴素三大件、也试过一些其他框架，但因为水平太次最终还是回来投奔 Hugo。本篇介绍 hugo 的基本结构及用法。</p>
+<h2>安装 Hugo</h2>
 <p>所需内容：</p>
 <ul>
 <li><a href="https://git-scm.com">Git</a></li>
 <li><a href="https://go.dev">Go</a></li>
 <li><a href="https://https://github.com/gohugoio/hugo/releases/latest">Hugo</a></li>
 </ul>
-<p>Hugo分为standard和extended两个版本。区别是extended版本会把图片处理成WebP格式的，还有自带的sass处理器。两者的占用相差也不大，一般情况都选择extended即可。</p>
+<p>Hugo 分为 standard 和 extended 两个版本。区别是 extended 版本会把图片处理成 WebP 格式的，还有自带的 sass 处理器。两者的占用相差也不大，一般情况都选择 extended 即可。</p>
 <h2>目录结构</h2>
 <p>完成安装後，选择合适的路径，输入:</p>
 <pre><code class="language-shell hljs">hugo new site my-site
@@ -37,36 +37,36 @@ git init
 ├── themes/             &lt;-- 主题
 └── hugo.toml           &lt;-- 配置文件，网站的全局配置
 </code></pre>
-<p>现在可以启动hugo自带的网页服务器，方便在本地调试网站。访问默认地址<code>127.0.0.1:1313</code>观察网页效果：</p>
+<p>现在可以启动 hugo 自带的网页服务器，方便在本地调试网站。访问默认地址<code>127.0.0.1:1313</code>观察网页效果：</p>
 <pre><code class="language-shell hljs">hugo serve
 </code></pre>
 <h2>安装主题</h2>
-<p>不出意外的话，访问hugo服务首先映入眼帘的，只有page not found一行。
-新建项目没有任何的预设布局，网站的DOM结构基本是空的，无法正常呈现内容。</p>
-<p>这就轮到theme出马，使用主题避免自己写样式的劳苦，
-<a href="https://themes.gohugo.io/">Hugo官方的主题仓库</a>有许多不同类型不同风格的主题可供挑选。<br>
+<p>不出意外的话，访问 hugo 服务首先映入眼帘的，只有 page not found 一行。
+新建项目没有任何的预设布局，网站的 DOM 结构基本是空的，无法正常呈现内容。</p>
+<p>这就轮到 theme 出马，使用主题避免自己写样式的劳苦，
+<a href="https://themes.gohugo.io/">Hugo 官方的主题仓库</a>有许多不同类型不同风格的主题可供挑选。<br>
 我之前使用<a href="https://github.com/CaiJimmy/hugo-theme-stack">stack</a>，很干净的主题，
 不过这一次我想自己做主题，试图锻炼我的审美。</p>
-<p>主题使用Git的子模块管理，把中意的主题作为子模块拉到<code>theme/&lt;theme-name&gt;</code>文件夹，再修改一行配置文件即可：</p>
+<p>主题使用 Git 的子模块管理，把中意的主题作为子模块拉到<code>theme/&lt;theme-name&gt;</code>文件夹，再修改一行配置文件即可：</p>
 <pre><code class="language-shell hljs">git submodule add https://github.com/CaiJimmy/hugo-theme-stack.git theme/stack
 echo "theme = 'stack'" &gt;&gt; hugo.toml
 </code></pre>
 <p>现在应该能正常呈现网站内容了。</p>
 <h2>内容管理</h2>
-<p>Hugo的所有内容都放在<code>content/</code>之中管理，根据内容的分层结构处理路由等事务。
+<p>Hugo 的所有内容都放在<code>content/</code>之中管理，根据内容的分层结构处理路由等事务。
 先来介绍一个重要概念，<strong>Page bundles</strong>。
 分两种，<strong>leaf bundle</strong> 和 <strong>branch bundle</strong>。</p>
 <h3>leaf bundle</h3>
-<p>把内容及其所需的资源统放到一个文件夹里，其中包含一个<code>index.md</code>，形成一个leaf bundle。譬如一个about/文件夹，其中有一篇文章和一张图片。</p>
+<p>把内容及其所需的资源统放到一个文件夹里，其中包含一个<code>index.md</code>，形成一个 leaf bundle。譬如一个 about/文件夹，其中有一篇文章和一张图片。</p>
 <pre><code class="language-txt hljs language-plaintext">content/
 └── leaf/
     ├── index.md
     └── cover.jpg
 
 </code></pre>
-<p>leaf喻为植物形态的末端，不再有后继，是内容管理的基本单元。</p>
+<p>leaf 喻为植物形态的末端，不再有后继，是内容管理的基本单元。</p>
 <h3>branch bundle</h3>
-<p>而branch bundle则更高一层，可用作目录，包含任意数量的子文件夹，其中包含一个<code>_index.md</code>。</p>
+<p>而 branch bundle 则更高一层，可用作目录，包含任意数量的子文件夹，其中包含一个<code>_index.md</code>。</p>
 <pre><code class="language-txt hljs language-plaintext">content/
 ├── branch/
 │   ├── leaf-a/
@@ -76,11 +76,11 @@ echo "theme = 'stack'" &gt;&gt; hugo.toml
 │   └── _index.md
 └── _index.md
 </code></pre>
-<p>这里面有几个branch bundle？<br>
-content/作为顶层文件夹，肯定是一个brach bundle，其中的branch/有_index.md，所以答案是两个。</p>
-<p>page bundle组织彼此相关联的内容，避免什么东西都往<code>static/</code>或<code>assets/</code>这两个公共资源文件夹里放。</p>
+<p>这里面有几个 branch bundle？<br>
+content/作为顶层文件夹，肯定是一个 brach bundle，其中的 branch/有_index.md，所以答案是两个。</p>
+<p>page bundle 组织彼此相关联的内容，避免什么东西都往<code>static/</code>或<code>assets/</code>这两个公共资源文件夹里放。</p>
 <h2>配置文件</h2>
-<p>Hugo默认在新的项目生成一个全局配置文件<code>hugo.toml</code>：</p>
+<p>Hugo 默认在新的项目生成一个全局配置文件<code>hugo.toml</code>：</p>
 <pre><code class="language-toml hljs language-ini"><span class="hljs-comment"># hugo.toml</span>
 <span class="hljs-attr">baseURL</span> = <span class="hljs-string">'https://example.org/'</span>
 <span class="hljs-attr">languageCode</span> = <span class="hljs-string">'en-us'</span>
@@ -88,16 +88,16 @@ content/作为顶层文件夹，肯定是一个brach bundle，其中的branch/�
 <span class="hljs-attr">theme</span> = <span class="hljs-string">'stack'</span>
 </code></pre>
 <p><code>title</code>是浏览器标签页的标题，随意修改；<br>
-<code>baseURL</code>定义网站的基本url，作为所有相对链接的绝对参照点，乱填可能会导致资源无法正确定位。
-我使用Github Action部署网站，所以写"https://proxyerium.github.io/"，<strong>注意尾部一定要有斜杠</strong>。</p>
+<code>baseURL</code>定义网站的基本 url，作为所有相对链接的绝对参照点，乱填可能会导致资源无法正确定位。
+我使用 Github Action 部署网站，所以写"https://proxyerium.github.io/"，<strong>注意尾部一定要有斜杠</strong>。</p>
 <h2>部署网站</h2>
-<p>部署网站有许多方法，参考<a href="https://gohugo.io/hosting-and-deployment/">官方文档</a>。我还没尝试过Github Action以外的方法，暂且只写这一种 :P</p>
+<p>部署网站有许多方法，参考<a href="https://gohugo.io/hosting-and-deployment/">官方文档</a>。我还没尝试过 Github Action 以外的方法，暂且只写这一种 :P</p>
 <h3>Github Actions</h3>
 <ol>
-<li>远程仓库，找到Settings -&gt; Pages -&gt; Source，改成"Github Actions"。</li>
+<li>远程仓库，找到 Settings -&gt; Pages -&gt; Source，改成"Github Actions"。</li>
 <li>本地仓库，创建工作流脚本<code>.github/workflows/hugo.yaml</code>，用官方提供的<a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/#procedure">工作流模板</a>即可，唯独留心里面的<code>HUGO_VERSION</code>对应自己正在使用的版本，免得兼容问题。</li>
 <li>整理好所有内容後推送到远程仓库。</li>
-<li>找到远程仓库顶部Actions标签页，观赏action流程，完成後便能访问部署好的网站，大功告成！</li>
+<li>找到远程仓库顶部 Actions 标签页，观赏 action 流程，完成後便能访问部署好的网站，大功告成！</li>
 </ol>
 <h2>挖坑</h2>
 <p>暂时先这样，还有很多核心功能我都还没摸过：shortcodes、templates、i18n、archetypes……应该会填完的吧？</p>

@@ -9,9 +9,9 @@
     <body>
         <a href="..">back</a>
 <p>先定位到本地文件夹：</p>
-<p>在库里点开Darkest Dungeon -&gt; 齿轮图标 -&gt; 管理（Manage） -&gt; 浏览本地文件（Browse local files）</p>
+<p>在库里点开 Darkest Dungeon -&gt; 齿轮图标 -&gt; 管理（Manage） -&gt; 浏览本地文件（Browse local files）</p>
 <p>现在的位置应该是 <code>..\Steam\steamapps\common\DarkestDungeon\</code>，再进入到<code>_windows\</code>。</p>
-<p>双击其中的 <strong>steam_workshop_upload.exe</strong>，此时程序会创建一个 “<em>sample_project.xml</em>”（这个xml可以随意改名，一般改成“<em>project.xml</em>”）：</p>
+<p>双击其中的 <strong>steam_workshop_upload.exe</strong>，此时程序会创建一个 “<em>sample_project.xml</em>”（这个 xml 可以随意改名，一般改成“<em>project.xml</em>”）：</p>
 <pre><code class="language-xml hljs"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"utf-8"</span>?&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">project</span>&gt;</span>
  <span class="hljs-tag">&lt;<span class="hljs-name">ItemDescriptionShort</span>/&gt;</span>
@@ -34,15 +34,15 @@ characters or less here!<span class="hljs-tag">&lt;/<span class="hljs-name">Item
 
 </code></pre>
 <p>并打开一个命令行形式的文档，这个文档会说明一个创意工坊模组需要什么元数据。</p>
-<p>把这个xml文件移动到要做成Mod的那个文件夹的<strong>根目录</strong>。</p>
+<p>把这个 xml 文件移动到要做成 Mod 的那个文件夹的<strong>根目录</strong>。</p>
 <p>然後按需修改对应的元数据，值得注意有三个必填项：</p>
 <ul>
-<li><code>&lt;ModDataPath&gt;</code> Mod文件夹在本机的绝对路径</li>
-<li><code>&lt;Visibility&gt;</code> Mod在创意工坊的访问权限</li>
+<li><code>&lt;ModDataPath&gt;</code> Mod 文件夹在本机的绝对路径</li>
+<li><code>&lt;Visibility&gt;</code> Mod 在创意工坊的访问权限</li>
 <li><code>&lt;UploadMode&gt;</code> 上传方式，通常“direct_upload”就行</li>
 </ul>
-<p>填好以後把 project.xml 拖进窗口，等待程序处理完成後，xml里会多一个steam给这个Mod分配的唯一<code>&lt;PublishedFileId&gt;</code>。完毕。</p>
-<p>还有一点，後续Mod有更新的话记得也是在这个文件夹里做改动，依旧注意<code>&lt;ModDataPath&gt;</code>是否有效。</p>
+<p>填好以後把 project.xml 拖进窗口，等待程序处理完成後，xml 里会多一个 steam 给这个 Mod 分配的唯一<code>&lt;PublishedFileId&gt;</code>。完毕。</p>
+<p>还有一点，後续 Mod 有更新的话记得也是在这个文件夹里做改动，依旧注意<code>&lt;ModDataPath&gt;</code>是否有效。</p>
 <h2>遭遇问题</h2>
 <blockquote>
 <p>拖文件进去後窗口自动关闭，然後无事发生</p>
